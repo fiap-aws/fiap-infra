@@ -1,6 +1,6 @@
 # AWS Launch Template
 resource "aws_launch_template" "fiap_devops_ecs_lt" {
-  name_prefix   = "ecs-template"
+  name_prefix   = "fiap-devops-template"
   image_id      = "ami-05b10e08d247fb927"
   instance_type = "t2.micro"
 
@@ -21,7 +21,7 @@ resource "aws_launch_template" "fiap_devops_ecs_lt" {
   tag_specifications {
     resource_type = "instance"
     tags = {
-      Name = "ecs-instance"
+      Name = "fiap-devops-ecs-instance"
     }
   }
 }
