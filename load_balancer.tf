@@ -3,7 +3,7 @@ resource "aws_lb" "ecs_alb" {
   internal           = false
   load_balancer_type = "application"
   security_groups    = [aws_security_group.fiap_devops_security_group.id]
-  subnets            = [aws_subnet.fiap_devops_public_subnet.id]
+  subnets            = [aws_subnet.fiap_devops_public_subnet.id, aws_subnet.fiap_devops_public_subnet_2.id]
   tags = {
     Name = "ecs-alb"
   }
