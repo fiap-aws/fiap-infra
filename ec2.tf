@@ -1,7 +1,11 @@
+data "aws_ssm_parameter" "ecs_node_ami" {
+  name = "/aws/service/ecs/optimized-ami/amazon-linux-2/recommended/image_id"
+}
+
 # AWS Launch Template
 resource "aws_launch_template" "fiap_devops_ecs_lt" {
   name_prefix   = "fiap-devops-template"
-  image_id      = "ami-062c116e449466e7f"
+  image_id      = data.aws_ssm_parameter.ecs_node_ami.value
   instance_type = "t2.micro"
 
   key_name               = "fiap_keypair"
