@@ -88,7 +88,7 @@ resource "aws_ecs_service" "ecs_service" {
 
   load_balancer {
     target_group_arn = aws_lb_target_group.fiap_devops_ecs_tg.arn
-    container_name   = "simple-html-app"
+    container_name   = "simple-docker-image"
     container_port   = 80
   }
 
