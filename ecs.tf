@@ -35,7 +35,7 @@ resource "aws_ecs_task_definition" "fiap_devops_task_definition" {
   container_definitions = jsonencode([
     {
       name      = "simple-html-app"
-      image     = "docker.io/emunari/simple-docker-image"
+      image     = "docker.io/docker/example-voting-app-vote"
       cpu       = 1
       memory    = 128
       essential = true
