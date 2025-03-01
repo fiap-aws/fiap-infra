@@ -1,5 +1,4 @@
 resource "aws_lb" "ecs_alb" {
-<<<<<<< HEAD
  name               = "ecs-alb"
  internal           = false
  load_balancer_type = "application"
@@ -28,13 +27,6 @@ resource "aws_lb_target_group" "fiap_devops_ecs_tg" {
  protocol    = "HTTP"
  target_type = "ip"
  vpc_id      = aws_vpc.fiap_devops_vpc.id
-=======
-  name        = "ecs-target-group"
-  port        = 80
-  protocol    = "HTTP"
-  target_type = "ip"
-  vpc_id      = aws_vpc.main.id
->>>>>>> 024fc895ab8b3285f74b384e4f4055e80374ae94
 
   health_check {
     path = "/"

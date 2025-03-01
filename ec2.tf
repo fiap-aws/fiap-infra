@@ -32,7 +32,6 @@ resource "aws_autoscaling_group" "fiap_devops_ecs_asg" {
   max_size            = 1
   min_size            = 1
 
-<<<<<<< HEAD
  launch_template {
    id      = aws_launch_template.fiap_devops_ecs_lt.id
    version = "$Latest"
