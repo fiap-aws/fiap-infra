@@ -4,9 +4,9 @@ resource "aws_lb" "ecs_alb" {
   load_balancer_type = "application"
   security_groups    = [aws_security_group.fiap_devops_security_group.id]
   subnets            = [aws_subnet.fiap_devops_public_subnet.id, aws_subnet.fiap_devops_public_subnet_2.id]
-    tags = {
-      Name = "ecs-alb"
-    }
+  tags = {
+    Name = "ecs-alb"
+  }
 }
 
 resource "aws_lb_listener" "ecs_alb_listener" {
@@ -27,7 +27,7 @@ resource "aws_lb_target_group" "fiap_devops_ecs_tg" {
   target_type = "ip"
   vpc_id      = aws_vpc.fiap_devops_vpc.id
 
-    health_check {
-      path = "/"
-    }
+  health_check {
+    path = "/"
+  }
 }
