@@ -29,7 +29,7 @@ jobs:
     
      - name: Terraform init
        id: init
-       run: terraform init -backend-config="bucket=fiap-devops-statebucket"
+       run: terraform init
  
      - name: Terraform format
        id: fmt
