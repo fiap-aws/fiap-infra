@@ -32,7 +32,11 @@ resource "aws_launch_template" "fiap_devops_ecs_lt" {
     }
   }
 
-  user_data = filebase64("${path.module}/ecs.sh")
+  user_data = base64encode(<<-EOF
+      #!/bin/bash
+      echo ECS_CLUSTER=${aws_ecs_cluster.fiap_devops_ecs_cluster.name} >> /etc/ecs/ecs.config;
+    EOF
+  )
 }
 
 resource "aws_autoscaling_group" "fiap_devops_ecs_asg" {
