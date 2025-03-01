@@ -21,7 +21,6 @@ resource "aws_lb_listener" "ecs_alb_listener" {
 }
 
 resource "aws_lb_target_group" "fiap_devops_ecs_tg" {
-<<<<<<< HEAD
  name        = "ecs-target-group"
  port        = 80
  protocol    = "HTTP"
