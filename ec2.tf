@@ -32,7 +32,7 @@ resource "aws_launch_template" "fiap_devops_ecs_lt" {
 }
 
 resource "aws_autoscaling_group" "fiap_devops_ecs_asg" {
-  vpc_zone_identifier = [aws_subnet.fiap_devops_public_subnet.id]
+  vpc_zone_identifier = [aws_subnet.fiap_devops_public_subnet.id, aws_subnet.fiap_devops_public_subnet_2.id]
   desired_capacity    = 1
   max_size            = 1
   min_size            = 1

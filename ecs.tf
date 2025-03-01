@@ -36,7 +36,7 @@ resource "aws_ecs_task_definition" "fiap_devops_task_definition" {
   container_definitions = jsonencode([
     {
       name      = "simple-html-app"
-      image     = "docker.io/emunari/simple-docker-image"
+      image     = "docker.io/emunari/simple-docker-image:latest"
       cpu       = 1
       memory    = 128
       essential = true
@@ -64,10 +64,10 @@ resource "aws_ecs_service" "ecs_service" {
   name            = "fiap-devops-ecs-service"
   cluster         = aws_ecs_cluster.fiap_devops_ecs_cluster.id
   task_definition = aws_ecs_task_definition.fiap_devops_task_definition.arn
-  desired_count   = 2
+  desired_count   = 1
 
   network_configuration {
-    subnets         = [aws_subnet.fiap_devops_public_subnet.id]
+    subnets         = [aws_subnet.fiap_devops_public_subnet.id, aws_subnet.fiap_devops_public_subnet_2.id]
     security_groups = [aws_security_group.fiap_devops_security_group.id]
   }
 
