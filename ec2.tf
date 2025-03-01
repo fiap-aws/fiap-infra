@@ -40,10 +40,13 @@ resource "aws_launch_template" "fiap_devops_ecs_lt" {
 }
 
 resource "aws_autoscaling_group" "fiap_devops_ecs_asg" {
-  vpc_zone_identifier = [aws_subnet.fiap_devops_public_subnet.id, aws_subnet.fiap_devops_public_subnet_2.id]
-  desired_capacity    = 2
-  max_size            = 3
-  min_size            = 1
+  vpc_zone_identifier       = [aws_subnet.fiap_devops_public_subnet.id, aws_subnet.fiap_devops_public_subnet_2.id]
+  desired_capacity          = 2
+  max_size                  = 3
+  min_size                  = 1
+  health_check_grace_period = 0
+  health_check_type         = "EC2"
+  protect_from_scale_in     = false
 
   launch_template {
     id      = aws_launch_template.fiap_devops_ecs_lt.id
@@ -51,8 +54,14 @@ resource "aws_autoscaling_group" "fiap_devops_ecs_asg" {
   }
 
   tag {
+    key                 = "Name"
+    value               = "fiap-devops-ecs-cluster"
+    propagate_at_launch = true
+  }
+
+  tag {
     key                 = "AmazonECSManaged"
-    value               = true
+    value               = ""
     propagate_at_launch = true
   }
 }
