@@ -19,11 +19,13 @@ resource "aws_launch_template" "fiap_devops_ecs_lt" {
   }
 
   tag_specifications {
-    resource_type = "instance"
-    tags = {
-      Name = "fiap-devops-ecs-instance"
-    }
-  }
+   resource_type = "instance"
+   tags = {
+     Name = "ecs-instance"
+   }
+ }
+
+ user_data = filebase64("/ecs.sh")
 }
 
 resource "aws_autoscaling_group" "fiap_devops_ecs_asg" {
