@@ -1,7 +1,7 @@
 # AWS Launch Template
 resource "aws_launch_template" "fiap_devops_ecs_lt" {
   name_prefix   = "fiap-devops-template"
-  image_id      = "ami-05b10e08d247fb927"
+  image_id      = "ami-062c116e449466e7f"
   instance_type = "t2.micro"
 
   key_name               = "fiap_keypair"
