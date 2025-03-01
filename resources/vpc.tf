@@ -4,7 +4,7 @@ resource "aws_vpc" "fiap_devops_vpc" {
   enable_dns_hostnames = true
 
   tags = {
-    Name = "fiap_blog_vpc"
+    Name = "fiap_devops_vpc"
   }
 }
 
@@ -14,7 +14,7 @@ resource "aws_subnet" "fiap_public_subnet" {
   cidr_block = "10.0.1.0/24"
 
   tags = {
-    Name = "tcb_blog_public_subnet"
+    Name = "fiap_devops_public_subnet"
   }
 }
 
