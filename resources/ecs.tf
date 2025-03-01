@@ -37,8 +37,8 @@ resource "aws_ecs_task_definition" "fiap_devops_task_definition" {
     {
       name      = "simple-html-app"
       image     = "docker.io/emunari/simple-docker-image:latest"
-      cpu       = 1
-      memory    = 128
+      cpu       = 1000
+      memory    = 1024
       essential = true
       portMappings = [
         {
