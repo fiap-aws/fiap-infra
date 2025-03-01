@@ -29,10 +29,39 @@ resource "aws_ecs_cluster_capacity_providers" "fiap_devops_ecs_cluster_capacity"
  }
 }
 
+resource "aws_ecs_task_definition" "fiap_devops_task_definition" {
+  family = "fiap-devops-task-definition"
+  container_definitions = jsonencode([
+    {
+      name      = "simple-html-app"
+      image     = "docker.io/emunari/simple-docker-image"
+      cpu       = 1
+      memory    = 128
+      essential = true
+      portMappings = [
+        {
+          containerPort = 80
+          hostPort      = 80
+        }
+      ]
+    }
+  ])
+
+  volume {
+    name      = "service-storage"
+    host_path = "/ecs/service-storage"
+  }
+
+  placement_constraints {
+    type       = "memberOf"
+    expression = "attribute:ecs.availability-zone in [us-east-1a, us-east-1b]"
+  }
+}
+
 resource "aws_ecs_service" "ecs_service" {
  name            = "my-ecs-service"
  cluster         = aws_ecs_cluster.fiap_devops_ecs_cluster.id
- task_definition = aws_ecs_task_definition.ecs_task_definition.arn
+ task_definition = aws_ecs_task_definition.fiap_devops_task_definition.arn
  desired_count   = 2
 
  network_configuration {
