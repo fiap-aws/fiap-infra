@@ -32,7 +32,7 @@ resource "aws_ecs_cluster_capacity_providers" "fiap_devops_ecs_cluster_capacity"
 resource "aws_ecs_task_definition" "fiap_devops_task_definition" {
   family             = "fiap-devops-task-definition"
   network_mode       = "awsvpc"
-  execution_role_arn = "arn:aws:iam::532199187081:role/ecsTaskExecutionRole"
+  execution_role_arn = "arn:aws:iam::396913708590:role/ecsTaskExecutionRole"
   container_definitions = jsonencode([
     {
       name      = "simple-html-app"
