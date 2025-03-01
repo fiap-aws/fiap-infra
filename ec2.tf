@@ -6,12 +6,14 @@ resource "aws_launch_template" "fiap_devops_ecs_lt" {
 
   key_name               = "fiap_keypair"
   vpc_security_group_ids = [aws_security_group.fiap_devops_security_group.id]
+
   iam_instance_profile {
     name = "ecsInstanceRole"
   }
 
   block_device_mappings {
     device_name = "/dev/xvda"
+
     ebs {
       volume_size = 30
       volume_type = "gp2"
@@ -19,12 +21,14 @@ resource "aws_launch_template" "fiap_devops_ecs_lt" {
   }
 
   tag_specifications {
-   resource_type = "instance"
-   tags = {
-     Name = "ecs-instance"
-   }
- }
- user_data = filebase64("${path.module}/ecs.sh")
+    resource_type = "instance"
+
+    tags = {
+      Name = "ecs-instance"
+    }
+  }
+
+  user_data = filebase64("${path.module}/ecs.sh")
 }
 
 resource "aws_autoscaling_group" "fiap_devops_ecs_asg" {
@@ -37,10 +41,10 @@ resource "aws_autoscaling_group" "fiap_devops_ecs_asg" {
     id      = aws_launch_template.fiap_devops_ecs_lt.id
     version = "$Latest"
   }
+
   tag {
     key                 = "AmazonECSManaged"
     value               = true
     propagate_at_launch = true
   }
 }
-
