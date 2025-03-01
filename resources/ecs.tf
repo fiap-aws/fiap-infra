@@ -18,7 +18,7 @@ resource "aws_ecs_capacity_provider" "ecs_capacity_provider" {
 }
 
 resource "aws_ecs_cluster_capacity_providers" "fiap_devops_ecs_cluster_capacity" {
- cluster_name = aws_ecs_cluster.ecs_cluster.name
+ cluster_name = aws_ecs_cluster.fiap_devops_ecs_cluster.name
 
  capacity_providers = [aws_ecs_capacity_provider.ecs_capacity_provider.name]
 
@@ -31,7 +31,7 @@ resource "aws_ecs_cluster_capacity_providers" "fiap_devops_ecs_cluster_capacity"
 
 resource "aws_ecs_service" "ecs_service" {
  name            = "my-ecs-service"
- cluster         = aws_ecs_cluster.ecs_cluster.id
+ cluster         = aws_ecs_cluster.fiap_devops_ecs_cluster.id
  task_definition = aws_ecs_task_definition.ecs_task_definition.arn
  desired_count   = 2
 

@@ -56,8 +56,8 @@ resource "aws_route_table_association" "fiap_devops_pub_association" {
 }
 
 resource "aws_route_table_association" "subnet2_route" {
- subnet_id      = aws_subnet.fiap_devops_public_subnet_2.id
- route_table_id = aws_route_table.fiap_devops_rt.id
+  subnet_id      = aws_subnet.fiap_devops_public_subnet_2.id
+  route_table_id = aws_route_table.fiap_devops_rt.id
 }
 
 #SG
