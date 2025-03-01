@@ -24,7 +24,7 @@ resource "aws_launch_template" "fiap_devops_ecs_lt" {
      Name = "ecs-instance"
    }
  }
- user_data     = filebase64("/ecs.sh")
+ user_data = filebase64("${path.module}/ecs.sh")
 }
 
 resource "aws_autoscaling_group" "fiap_devops_ecs_asg" {
