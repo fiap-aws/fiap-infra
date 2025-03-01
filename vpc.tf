@@ -41,12 +41,6 @@ resource "aws_route_table" "fiap_devops_rt" {
   }
 }
 
-resource "aws_route" "fiap_devops_routetointernet" {
-  route_table_id         = aws_route_table.fiap_devops_rt.id
-  destination_cidr_block = "0.0.0.0/0"
-  gateway_id             = aws_internet_gateway.fiap_devops_igw.id
-}
-
 resource "aws_route_table_association" "fiap_devops_pub_association" {
   subnet_id      = aws_subnet.fiap_devops_public_subnet.id
   route_table_id = aws_route_table.fiap_devops_rt.id
