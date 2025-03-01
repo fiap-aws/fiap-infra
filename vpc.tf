@@ -1,6 +1,6 @@
 # FIAP DEVOPS VPC
 resource "aws_vpc" "fiap_devops_vpc" {
-  cidr_block = "10.0.0.0/16"
+  cidr_block           = "10.0.0.0/16"
   enable_dns_hostnames = true
 
   tags = {
@@ -60,12 +60,6 @@ resource "aws_route_table" "fiap_devops_rt" {
   }
 }
 
-resource "aws_route" "fiap_devops_routetointernet" {
-  route_table_id            = aws_route_table.fiap_devops_rt.id
-  destination_cidr_block    = "0.0.0.0/0"
-  gateway_id                = aws_internet_gateway.fiap_devops_igw.id
-}
-
 resource "aws_route_table_association" "fiap_devops_pub_association" {
   subnet_id      = aws_subnet.fiap_devops_public_subnet.id
   route_table_id = aws_route_table.fiap_devops_rt.id
@@ -73,11 +67,11 @@ resource "aws_route_table_association" "fiap_devops_pub_association" {
 
 #SG
 resource "aws_security_group" "fiap_devops_security_group" {
-    vpc_id = aws_vpc.fiap_devops_vpc.id
+  vpc_id = aws_vpc.fiap_devops_vpc.id
 
-    tags = {
-    	Name = "fiap_devops_security_group"
-    } 
+  tags = {
+    Name = "fiap_devops_security_group"
+  }
 }
 
 #Egress Rule for SG
