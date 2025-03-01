@@ -30,7 +30,7 @@ resource "aws_ecs_cluster_capacity_providers" "fiap_devops_ecs_cluster_capacity"
 }
 
 resource "aws_ecs_task_definition" "fiap_devops_task_definition" {
-  family = "fiap-devops-task-definition"
+  family       = "fiap-devops-task-definition"
   network_mode = "awsvpc"
   container_definitions = jsonencode([
     {
