@@ -47,3 +47,17 @@ resource "aws_route_table_association" "public" {
   subnet_id      = aws_subnet.fiap_devops_public_subnet[count.index].id
   route_table_id = aws_route_table.fiap_devops_rt.id
 }
+
+resource "aws_security_group" "fiap_devops_ecs_node_sg" {
+  name_prefix = "fiap-devops-ecs-node-sg-"
+  vpc_id      = aws_vpc.fiap_devops_vpc.id
+}
+
+resource "aws_vpc_security_group_egress_rule" "allow_egress" {
+  security_group_id = aws_security_group.fiap_devops_ecs_node_sg.id
+
+  cidr_ipv4   = "0.0.0.0/0"
+  from_port   = 0
+  ip_protocol = "tcp"
+  to_port     = 65535
+}
