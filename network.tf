@@ -53,11 +53,59 @@ resource "aws_security_group" "fiap_devops_ecs_node_sg" {
   vpc_id      = aws_vpc.fiap_devops_vpc.id
 }
 
-resource "aws_vpc_security_group_egress_rule" "allow_egress" {
+resource "aws_vpc_security_group_egress_rule" "allow_egress_ecs_node" {
   security_group_id = aws_security_group.fiap_devops_ecs_node_sg.id
 
   cidr_ipv4   = "0.0.0.0/0"
   from_port   = 0
   ip_protocol = "tcp"
   to_port     = 65535
+}
+
+resource "aws_security_group" "fiap_devops_ecs_task_sg" {
+  name_prefix = "fiap-devops-ecs-task-sg-"
+  description = "Allow all traffic within the VPC"
+  vpc_id      = aws_vpc.fiap_devops_vpc.id
+}
+
+resource "aws_vpc_security_group_egress_rule" "allow_egress_ecs_task" {
+  security_group_id = aws_security_group.fiap_devops_ecs_task_sg.id
+
+  cidr_ipv4   = "0.0.0.0/0"
+  from_port   = 0
+  ip_protocol = "tcp"
+  to_port     = 65535
+}
+
+resource "aws_vpc_security_group_ingress_rule" "allow_ingress_ecs_task" {
+  security_group_id = aws_security_group.fiap_devops_ecs_task_sg.id
+
+  cidr_ipv4   = aws_vpc.fiap_devops_vpc.cidr_block
+  from_port   = 0
+  ip_protocol = "tcp"
+  to_port     = 65535
+}
+
+resource "aws_security_group" "fiap_devops_alb_sg" {
+  name_prefix = "fiap-devops-alb-sg-"
+  description = "Allow all HTTP/HTTPS traffic from public"
+  vpc_id      = aws_vpc.fiap_devops_vpc.id
+}
+
+resource "aws_vpc_security_group_egress_rule" "allow_egress_alb" {
+  security_group_id = aws_security_group.fiap_devops_alb_sg.id
+
+  cidr_ipv4   = "0.0.0.0/0"
+  from_port   = 0
+  ip_protocol = "tcp"
+  to_port     = 65535
+}
+
+resource "aws_vpc_security_group_ingress_rule" "allow_ingress_alb" {
+  security_group_id = aws_security_group.fiap_devops_alb_sg.id
+
+  cidr_ipv4   = "0.0.0.0/0"
+  from_port   = 80
+  ip_protocol = "tcp"
+  to_port     = 80
 }
