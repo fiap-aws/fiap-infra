@@ -50,7 +50,7 @@ resource "aws_autoscaling_group" "fiap_devops_ecs_asg" {
 }
 
 resource "aws_ecs_capacity_provider" "fiap_devops_ecs_capacity_provider" {
-  name = "demo-ecs-ec2"
+  name = "fiap-devops-ecs-ec2"
 
   auto_scaling_group_provider {
     auto_scaling_group_arn         = aws_autoscaling_group.fiap_devops_ecs_asg.arn
