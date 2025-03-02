@@ -18,7 +18,7 @@ resource "aws_subnet" "fiap_devops_public_subnet" {
   availability_zone       = local.azs_names[count.index]
   cidr_block              = cidrsubnet(aws_vpc.fiap_devops_vpc.cidr_block, 8, 10 + count.index)
   map_public_ip_on_launch = true
-  tags                    = { Name = "fiap-devops-public-subnet-${local.azs_names[count.index]}"}
+  tags                    = { Name = "fiap-devops-public-subnet-${local.azs_names[count.index]}" }
 }
 
 resource "aws_internet_gateway" "fiap_devops_igw" {
