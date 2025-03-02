@@ -122,7 +122,7 @@ resource "aws_ecs_service" "app" {
     ignore_changes = [desired_count]
   }
 
-  depends_on = [aws_lb_target_group.app]
+  depends_on = [aws_lb_target_group.fiap_devops_alb_tg]
 
   load_balancer {
     target_group_arn = aws_lb_target_group.fiap_devops_alb_tg.arn
