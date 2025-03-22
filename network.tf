@@ -21,11 +21,6 @@
 #   tags                    = { Name = "fiap-devops-public-subnet-${local.azs_names[count.index]}" }
 # }
 
-# resource "aws_internet_gateway" "fiap_devops_igw" {
-#   vpc_id = aws_vpc.fiap_devops_vpc.id
-#   tags   = { Name = "fiap-devops-igw" }
-# }
-
 # resource "aws_eip" "fiap_devops_eip" {
 #   count      = local.azs_count
 #   depends_on = [aws_internet_gateway.fiap_devops_igw]
@@ -108,4 +103,9 @@
 #   from_port   = 80
 #   ip_protocol = "tcp"
 #   to_port     = 80
+# }
+
+# resource "aws_internet_gateway" "fiap_devops_igw" {
+#   vpc_id = aws_vpc.fiap_devops_vpc.id
+#   tags   = { Name = "fiap-devops-igw" }
 # }
